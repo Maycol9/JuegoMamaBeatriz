@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Para mi mamá Beatriz Figueroa 💖</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Arial, sans-serif;
+    }
+
+    body {
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, #2b061e, #7b123f, #ff6aa2);
+      color: white;
+    }
+
+    .fondo-corazones {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    .corazon-fondo {
+      position: absolute;
+      bottom: -50px;
+      font-size: 25px;
+      animation: subir linear infinite;
+      opacity: 0.7;
+    }
+
+    @keyframes subir {
+      0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 0;
+      }
+      20% {
+        opacity: 0.8;
+      }
+      100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .contenedor {
+      position: relative;
+      z-index: 2;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 25px;
+    }
+
+    .pantalla {
+      display: none;
+      width: 100%;
+      max-width: 1050px;
+      min-height: 650px;
+      animation: aparecer 0.7s ease;
+    }
+
+    .pantalla.activa {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    @keyframes aparecer {
+      from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.98);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .tarjeta {
+      width: 100%;
+      padding: 45px;
+      border-radius: 35px;
+      background: rgba(255, 255, 255, 0.14);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35);
+      backdrop-filter: blur(15px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .tarjeta::before {
+      content: "";
+      position: absolute;
+      width: 360px;
+      height: 360px;
+      border-radius: 50%;
+      top: -120px;
+      right: -100px;
+      background: radial-gradient(circle, rgba(255, 209, 102, 0.32), transparent 70%);
+    }
+
+    .etiqueta {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.18);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      padding: 10px 18px;
+      border-radius: 999px;
+      font-weight: bold;
+      margin-bottom: 22px;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 7vw, 6rem);
+      line-height: 0.95;
+      letter-spacing: -2px;
+      margin-bottom: 20px;
+      text-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+    }
+
+    h2 {
+      font-size: clamp(2rem, 5vw, 4rem);
+      line-height: 1;
+      margin-bottom: 20px;
+    }
+
+    h1 span,
+    h2 span {
+      color: #ffd166;
+      text-shadow: 0 0 25px rgba(255, 209, 102, 0.7);
+    }
+
+    p {
+      font-size: 1.1rem;
+      line-height: 1.7;
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .botones {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    button {
+      border: none;
+      padding: 15px 24px;
+      border-radius: 18px;
+      cursor: pointer;
+      font-weight: 900;
+      font-size: 1rem;
+      background: linear-gradient(135deg, #fff0f7, #ffd166);
+      color: #3b0926;
+      box-shadow: 0 12px 30px rgba(255, 209, 102, 0.35);
+      transition: 0.25s;
+    }
+
+    button:hover {
+      transform: translateY(-3px) scale(1.03);
+      filter: brightness(1.08);
+    }
+
+    .secundario {
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      box-shadow: none;
+    }
+
+    .datos {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+      margin-top: 28px;
+    }
+
+    .dato {
+      padding: 20px;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.13);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .dato strong {
+      display: block;
+      font-size: 1.7rem;
+      color: #ffd166;
+      margin-bottom: 5px;
+    }
+
+    .historia-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 30px;
+    }
+
+    .historia-card {
+      padding: 24px;
+      min-height: 170px;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.13);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      animation: subirCard 0.7s ease both;
+    }
+
+    .historia-card:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    .historia-card:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .historia-card:nth-child(4) {
+      animation-delay: 0.45s;
+    }
+
+    @keyframes subirCard {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .icono {
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+
+    .juego-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 22px;
+      margin-top: 25px;
+    }
+
+    .area-juego {
+      position: relative;
+      height: 500px;
+      border-radius: 30px;
+      overflow: hidden;
+      background: radial-gradient(circle at top, rgba(255,255,255,0.25), rgba(255,255,255,0.07));
+      border: 1px solid rgba(255,255,255,0.22);
+      box-shadow: inset 0 0 60px rgba(255, 122, 182, 0.22);
+      touch-action: none;
+    }
+
+    .luna {
+      position: absolute;
+      top: 25px;
+      right: 30px;
+      width: 70px;
+      height: 70px;
+      border-radius: 50%;
+      background: radial-gradient(circle, #fff, #ffd166);
+      box-shadow: 0 0 35px #ffd166;
+    }
+
+    .canasta {
+      position: absolute;
+      bottom: 18px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 95px;
+      height: 60px;
+      border-radius: 20px 20px 30px 30px;
+      background: rgba(255,255,255,0.2);
+      border: 1px solid rgba(255,255,255,0.3);
+      display: grid;
+      place-items: center;
+      font-size: 2.5rem;
+      user-select: none;
+    }
+
+    .objeto {
+      position: absolute;
+      top: -60px;
+      font-size: 2.2rem;
+      user-select: none;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.3));
+    }
+
+    .panel-juego {
+      padding: 22px;
+      border-radius: 28px;
+      background: rgba(255,255,255,0.13);
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .linea {
+      display: flex;
+      justify-content: space-between;
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.14);
+    }
+
+    .linea strong {
+      color: #ffd166;
+      font-size: 1.4rem;
+    }
+
+    .barra {
+      width: 100%;
+      height: 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.18);
+      overflow: hidden;
+      margin-top: 18px;
+    }
+
+    .barra div {
+      width: 0%;
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #ffd166, #ff7ab6, white);
+      transition: 0.3s;
+    }
+
+    .mensaje-juego {
+      margin-top: 18px;
+      padding: 18px;
+      min-height: 145px;
+      border-radius: 22px;
+      background: rgba(255, 209, 102, 0.15);
+      line-height: 1.6;
+    }
+
+    .opciones {
+      display: grid;
+      gap: 15px;
+      margin-top: 28px;
+    }
+
+    .opcion {
+      width: 100%;
+      text-align: left;
+      background: rgba(255,255,255,0.14);
+      color: white;
+      border: 1px solid rgba(255,255,255,0.22);
+      box-shadow: none;
+    }
+
+    .opcion.correcta {
+      background: linear-gradient(135deg, #ffd166, #ff7ab6);
+      color: #3b0926;
+    }
+
+    .carta {
+      width: 100%;
+      max-width: 830px;
+      padding: 45px;
+      border-radius: 35px;
+      background: rgba(255,255,255,0.94);
+      color: #4b1234;
+      box-shadow: 0 25px 80px rgba(0,0,0,0.35);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .carta::before {
+      content: "💐";
+      position: absolute;
+      top: 15px;
+      right: 25px;
+      font-size: 4rem;
+      opacity: 0.2;
+    }
+
+    .carta h2 {
+      color: #9c1456;
+    }
+
+    .carta p {
+      color: #4b1234;
+      margin-bottom: 14px;
+    }
+
+    .firma {
+      margin-top: 25px;
+      color: #9c1456;
+      font-size: 1.25rem;
+      font-weight: 900;
+    }
+
+    .confeti {
+      position: fixed;
+      inset: 0;
+      z-index: 50;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .pieza {
+      position: absolute;
+      top: -40px;
+      font-size: 1.5rem;
+      animation: caer 3.5s linear forwards;
+    }
+
+    @keyframes caer {
+      to {
+        transform: translateY(110vh) rotate(720deg);
+        opacity: 0;
+      }
+    }
+
+    .nota {
+      margin-top: 15px;
+      font-size: 0.95rem;
+      opacity: 0.8;
+    }
+
+    @media (max-width: 850px) {
+      .tarjeta {
+        padding: 25px;
+      }
+
+      .datos,
+      .historia-grid,
+      .juego-layout {
+        grid-template-columns: 1fr;
+      }
+
+      .area-juego {
+        height: 430px;
+      }
+
+      h1 {
+        letter-spacing: -1px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="fondo-corazones" id="fondoCorazones"></div>
+  <div class="confeti" id="confeti"></div>
+
+  <main class="contenedor">
+
+    <section class="pantalla activa" id="inicio">
+      <div class="tarjeta">
+        <div class="etiqueta">💖 Juego especial por el Día de la Madre</div>
+
+        <h1>Para mi mamá <span>Beatriz Figueroa</span></h1>
+
+        <p>
+          Hoy empieza una pequeña aventura creada con mucho cariño. 
+          En este juego vas a recoger corazones, desbloquear recuerdos bonitos 
+          y llegar a una carta final hecha especialmente para ti.
+        </p>
+
+        <div class="datos">
+          <div class="dato">
+            <strong>3</strong>
+            Capítulos de historia
+          </div>
+          <div class="dato">
+            <strong>25</strong>
+            Corazones por reunir
+          </div>
+          <div class="dato">
+            <strong>1</strong>
+            Carta especial
+          </div>
+        </div>
+
+        <div class="botones">
+          <button onclick="irA('historia')">Comenzar aventura 💐</button>
+          <button class="secundario" onclick="musica()" id="btnMusica">Activar música suave 🎵</button>
+        </div>
+
+        <p class="nota">
+          Consejo: si lo abres en celular, mueve la canasta con el dedo.
+        </p>
+      </div>
+    </section>
+
+    <section class="pantalla" id="historia">
+      <div class="tarjeta">
+        <div class="etiqueta">🌷 Capítulo 1: Una mamá única</div>
+
+        <h2>La historia de <span>Beatriz</span></h2>
+
+        <p>
+          En una familia llena de cariño existe una mamá especial, una mujer que con su amor,
+          su paciencia y su fortaleza convierte los días difíciles en esperanza.
+        </p>
+
+        <div class="historia-grid">
+          <div class="historia-card">
+            <div class="icono">🕯️</div>
+            <h3>Luz en el camino</h3>
+            <p>Cuando hay dudas, su voz trae calma. Cuando hay cansancio, su amor da fuerza.</p>
+          </div>
+
+          <div class="historia-card">
+            <div class="icono">🤍</div>
+            <h3>Corazón protector</h3>
+            <p>Su manera de cuidar no siempre necesita palabras; basta su presencia para sentirse en casa.</p>
+          </div>
+
+          <div class="historia-card">
+            <div class="icono">🌹</div>
+            <h3>Amor verdadero</h3>
+            <p>El amor de mamá se demuestra en cada sacrificio, cada consejo y cada abrazo sincero.</p>
+          </div>
+
+          <div class="historia-card">
+            <div class="icono">👑</div>
+            <h3>Beatriz Figueroa</h3>
+            <p>Una mamá valiente, noble y digna de recibir todo lo bonito del mundo.</p>
+          </div>
+        </div>
+
+        <div class="botones">
+          <button onclick="iniciarJuego()">Ir al juego de corazones 💞</button>
+          <button class="secundario" onclick="irA('inicio')">Volver</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="pantalla" id="juego">
+      <div class="tarjeta">
+        <div class="etiqueta">🎮 Capítulo 2: Recoge amor para mamá</div>
+
+        <h2>Reúne <span>25 corazones</span></h2>
+
+        <p>
+          Mueve la canasta y recoge corazones, flores y estrellas. 
+          Evita las nubes tristes porque te quitan tiempo.
+        </p>
+
+        <div class="juego-layout">
+          <div class="area-juego" id="areaJuego">
+            <div class="luna"></div>
+            <div class="canasta" id="canasta">🧺</div>
+          </div>
+
+          <div class="panel-juego">
+            <div class="linea">
+              <span>Corazones</span>
+              <strong id="puntaje">0</strong>
+            </div>
+
+            <div class="linea">
+              <span>Tiempo</span>
+              <strong id="tiempo">60</strong>
+            </div>
+
+            <div class="linea">
+              <span>Nivel de amor</span>
+              <strong id="nivel">1</strong>
+            </div>
+
+            <div class="barra">
+              <div id="progreso"></div>
+            </div>
+
+            <div class="mensaje-juego" id="mensajeJuego">
+              Recoge corazones para desbloquear mensajes bonitos para Beatriz Figueroa.
+            </div>
+
+            <div class="botones">
+              <button class="secundario" onclick="iniciarJuego()">Reiniciar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="pantalla" id="pregunta">
+      <div class="tarjeta">
+        <div class="etiqueta">✨ Capítulo 3: Pregunta del corazón</div>
+
+        <h2>Para abrir la carta final...</h2>
+
+        <p>
+          ¿Qué hace única a una mamá como Beatriz Figueroa?
+        </p>
+
+        <div class="opciones">
+          <button class="opcion" onclick="respuesta(this, true)">
+            Su amor, su paciencia, su fuerza y todo lo que entrega por su familia 💖
+          </button>
+
+          <button class="opcion" onclick="respuesta(this, false)">
+            Solamente los regalos materiales 🎁
+          </button>
+
+          <button class="opcion" onclick="respuesta(this, false)">
+            Solo las palabras bonitas de un día 🌷
+          </button>
+        </div>
+
+        <p class="nota" id="mensajePregunta"></p>
+      </div>
+    </section>
+
+    <section class="pantalla" id="final">
+      <div class="carta">
+        <h2>Feliz Día de la Madre, Beatriz Figueroa 💖</h2>
+
+        <p id="textoMaquina"></p>
+
+        <p>
+          Mamá, este pequeño juego fue creado para recordarte que eres una mujer maravillosa,
+          una guía, una fuerza y una bendición en mi vida.
+        </p>
+
+        <p>
+          Gracias por tus consejos, por tu cariño, por tu paciencia y por todas esas veces
+          en las que diste más de ti para verme bien. Tu amor no tiene comparación y tu presencia
+          hace que todo sea mejor.
+        </p>
+
+        <p>
+          Hoy quiero que sepas que te admiro, te respeto y te llevo en mi corazón. 
+          Que este Día de la Madre esté lleno de alegría, flores, abrazos y sonrisas,
+          porque te mereces todo lo bonito del mundo.
+        </p>
+
+        <div class="firma">
+          Con mucho amor, para mi mamá Beatriz Figueroa 🌹
+        </div>
+
+        <div class="botones">
+          <button onclick="celebrar()">Lluvia de corazones 💞</button>
+          <button onclick="irA('inicio')">Jugar otra vez</button>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    const pantallas = ["inicio", "historia", "juego", "pregunta", "final"];
+
+    const fondoCorazones = document.getElementById("fondoCorazones");
+    const areaJuego = document.getElementById("areaJuego");
+    const canasta = document.getElementById("canasta");
+    const puntajeTexto = document.getElementById("puntaje");
+    const tiempoTexto = document.getElementById("tiempo");
+    const nivelTexto = document.getElementById("nivel");
+    const progreso = document.getElementById("progreso");
+    const mensajeJuego = document.getElementById("mensajeJuego");
+    const confeti = document.getElementById("confeti");
+
+    let puntaje = 0;
+    let tiempo = 60;
+    let nivel = 1;
+    let posicionCanasta = 50;
+    let reloj = null;
+    let creadorObjetos = null;
+
+    let musicaActiva = false;
+    let audioCtx = null;
+    let intervaloMusica = null;
+
+    const mensajes = [
+      "💖 Beatriz, cada corazón representa un gracias por todo lo que haces.",
+      "🌷 Tu amor es de esos que protegen, acompañan y sanan.",
+      "✨ Una mamá como tú convierte cualquier día difícil en una oportunidad para seguir.",
+      "👑 Eres ejemplo de fuerza, nobleza y amor verdadero.",
+      "💐 Este juego guarda una carta final creada especialmente para ti."
+    ];
+
+    function irA(id) {
+      pantallas.forEach(p => document.getElementById(p).classList.remove("activa"));
+      document.getElementById(id).classList.add("activa");
+
+      if (id !== "juego") {
+        detenerJuego();
+      }
+    }
+
+    function crearFondo() {
+      const iconos = ["💖", "💗", "💞", "🌹", "💐", "✨"];
+
+      for (let i = 0; i < 35; i++) {
+        const c = document.createElement("div");
+        c.className = "corazon-fondo";
+        c.textContent = iconos[Math.floor(Math.random() * iconos.length)];
+        c.style.left = Math.random() * 100 + "%";
+        c.style.fontSize = 18 + Math.random() * 30 + "px";
+        c.style.animationDuration = 8 + Math.random() * 12 + "s";
+        c.style.animationDelay = Math.random() * 10 + "s";
+        fondoCorazones.appendChild(c);
+      }
+    }
+
+    function iniciarJuego() {
+      puntaje = 0;
+      tiempo = 60;
+      nivel = 1;
+      posicionCanasta = 50;
+
+      actualizarPanel();
+      limpiarObjetos();
+      irA("juego");
+      moverCanasta();
+      detenerJuego();
+
+      reloj = setInterval(() => {
+        tiempo--;
+
+        if (tiempo <= 0) {
+          tiempo = 0;
+          terminarJuego(false);
+        }
+
+        actualizarPanel();
+      }, 1000);
+
+      creadorObjetos = setInterval(crearObjeto, 650);
+    }
+
+    function detenerJuego() {
+      clearInterval(reloj);
+      clearInterval(creadorObjetos);
+      reloj = null;
+      creadorObjetos = null;
+    }
+
+    function limpiarObjetos() {
+      document.querySelectorAll(".objeto").forEach(o => o.remove());
+    }
+
+    function actualizarPanel() {
+      puntajeTexto.textContent = puntaje;
+      tiempoTexto.textContent = tiempo;
+
+      if (puntaje >= 18) {
+        nivel = 3;
+      } else if (puntaje >= 9) {
+        nivel = 2;
+      } else {
+        nivel = 1;
+      }
+
+      nivelTexto.textContent = nivel;
+      progreso.style.width = Math.min((puntaje / 25) * 100, 100) + "%";
+
+      const indice = Math.min(Math.floor(puntaje / 5), mensajes.length - 1);
+      mensajeJuego.textContent = mensajes[indice];
+    }
+
+    function moverCanasta() {
+      canasta.style.left = posicionCanasta + "%";
+    }
+
+    function crearObjeto() {
+      const objeto = document.createElement("div");
+      objeto.className = "objeto";
+
+      const buenos = ["💖", "💗", "💞", "🌹", "💐", "⭐"];
+      const malos = ["☁️", "💧"];
+
+      const esBueno = Math.random() > 0.18;
+
+      objeto.dataset.bueno = esBueno ? "1" : "0";
+      objeto.textContent = esBueno 
+        ? buenos[Math.floor(Math.random() * buenos.length)]
+        : malos[Math.floor(Math.random() * malos.length)];
+
+      objeto.style.left = Math.random() * 88 + 4 + "%";
+      areaJuego.appendChild(objeto);
+
+      let y = -50;
+      const velocidad = 2.2 + nivel * 0.7 + Math.random() * 1.3;
+
+      const caida = setInterval(() => {
+        y += velocidad;
+        objeto.style.transform = "translateY(" + y + "px) rotate(" + (y * 2) + "deg)";
+
+        const rObjeto = objeto.getBoundingClientRect();
+        const rCanasta = canasta.getBoundingClientRect();
+        const rArea = areaJuego.getBoundingClientRect();
+
+        if (colision(rObjeto, rCanasta)) {
+          clearInterval(caida);
+          objeto.remove();
+
+          if (objeto.dataset.bueno === "1") {
+            puntaje++;
+            textoFlotante("+1 💖", rCanasta.left + rCanasta.width / 2, rCanasta.top);
+
+            if (puntaje >= 25) {
+              terminarJuego(true);
+            }
+          } else {
+            tiempo = Math.max(0, tiempo - 4);
+            textoFlotante("-4s ☁️", rCanasta.left + rCanasta.width / 2, rCanasta.top);
+          }
+
+          actualizarPanel();
+        }
+
+        if (rObjeto.top > rArea.bottom + 80) {
+          clearInterval(caida);
+          objeto.remove();
+        }
+      }, 16);
+    }
+
+    function colision(a, b) {
+      return !(a.right < b.left || a.left > b.right || a.bottom < b.top || a.top > b.bottom);
+    }
+
+    function terminarJuego(gano) {
+      detenerJuego();
+      limpiarObjetos();
+
+      if (gano) {
+        celebrar();
+        setTimeout(() => irA("pregunta"), 900);
+      } else {
+        mensajeJuego.textContent = "Se acabó el tiempo, pero el amor por mamá nunca se acaba. Presiona reiniciar y vuelve a intentarlo 💖";
+      }
+    }
+
+    function textoFlotante(texto, x, y) {
+      const t = document.createElement("div");
+      t.textContent = texto;
+      t.style.position = "fixed";
+      t.style.left = x + "px";
+      t.style.top = y + "px";
+      t.style.zIndex = "100";
+      t.style.fontWeight = "900";
+      t.style.color = "white";
+      t.style.textShadow = "0 4px 12px rgba(0,0,0,0.4)";
+      t.style.pointerEvents = "none";
+      t.style.transition = "0.8s ease";
+
+      document.body.appendChild(t);
+
+      requestAnimationFrame(() => {
+        t.style.transform = "translateY(-55px) scale(1.25)";
+        t.style.opacity = "0";
+      });
+
+      setTimeout(() => t.remove(), 850);
+    }
+
+    function respuesta(boton, correcta) {
+      const mensaje = document.getElementById("mensajePregunta");
+
+      if (correcta) {
+        document.querySelectorAll(".opcion").forEach(o => o.disabled = true);
+        boton.classList.add("correcta");
+        mensaje.textContent = "Respuesta correcta. El amor de mamá es el tesoro más grande.";
+        celebrar();
+
+        setTimeout(() => {
+          irA("final");
+          escribirTexto();
+        }, 1200);
+      } else {
+        mensaje.textContent = "Casi, pero la respuesta está en el corazón. Intenta de nuevo.";
+      }
+    }
+
+    function escribirTexto() {
+      const frase = "Querida mamá Beatriz Figueroa:";
+      const elemento = document.getElementById("textoMaquina");
+      elemento.textContent = "";
+
+      let i = 0;
+
+      const maquina = setInterval(() => {
+        elemento.textContent += frase[i];
+        i++;
+
+        if (i >= frase.length) {
+          clearInterval(maquina);
+        }
+      }, 55);
+    }
+
+    function celebrar() {
+      const iconos = ["💖", "💗", "💞", "🌹", "💐", "✨", "⭐"];
+
+      for (let i = 0; i < 80; i++) {
+        const p = document.createElement("div");
+        p.className = "pieza";
+        p.textContent = iconos[Math.floor(Math.random() * iconos.length)];
+        p.style.left = Math.random() * 100 + "%";
+        p.style.fontSize = 17 + Math.random() * 26 + "px";
+        p.style.animationDelay = Math.random() * 0.5 + "s";
+
+        confeti.appendChild(p);
+
+        setTimeout(() => p.remove(), 4200);
+      }
+    }
+
+    function musica() {
+      const btn = document.getElementById("btnMusica");
+
+      if (!musicaActiva) {
+        iniciarMusica();
+        musicaActiva = true;
+        btn.textContent = "Pausar música suave 🔇";
+      } else {
+        detenerMusica();
+        musicaActiva = false;
+        btn.textContent = "Activar música suave 🎵";
+      }
+    }
+
+    function iniciarMusica() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+
+      const notas = [392, 440, 523, 440, 392, 330, 392, 523];
+      let i = 0;
+
+      intervaloMusica = setInterval(() => {
+        tocarNota(notas[i % notas.length], 0.18, 0.045);
+        i++;
+      }, 420);
+    }
+
+    function detenerMusica() {
+      clearInterval(intervaloMusica);
+      intervaloMusica = null;
+    }
+
+    function tocarNota(freq, duracion, volumen) {
+      const osc = audioCtx.createOscillator();
+      const gain = audioCtx.createGain();
+
+      osc.type = "sine";
+      osc.frequency.value = freq;
+      gain.gain.value = volumen;
+      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duracion);
+
+      osc.connect(gain);
+      gain.connect(audioCtx.destination);
+
+      osc.start();
+      osc.stop(audioCtx.currentTime + duracion);
+    }
+
+    document.addEventListener("keydown", e => {
+      if (!document.getElementById("juego").classList.contains("activa")) return;
+
+      if (e.key === "ArrowLeft") {
+        posicionCanasta = Math.max(7, posicionCanasta - 5);
+      }
+
+      if (e.key === "ArrowRight") {
+        posicionCanasta = Math.min(93, posicionCanasta + 5);
+      }
+
+      moverCanasta();
+    });
+
+    function ubicarCanasta(clientX) {
+      const rect = areaJuego.getBoundingClientRect();
+      const porcentaje = ((clientX - rect.left) / rect.width) * 100;
+      posicionCanasta = Math.max(7, Math.min(93, porcentaje));
+      moverCanasta();
+    }
+
+    areaJuego.addEventListener("mousemove", e => ubicarCanasta(e.clientX));
+
+    areaJuego.addEventListener("click", e => ubicarCanasta(e.clientX));
+
+    areaJuego.addEventListener("touchmove", e => {
+      e.preventDefault();
+      ubicarCanasta(e.touches[0].clientX);
+    }, { passive: false });
+
+    crearFondo();
+  </script>
+</body>
+</html>
