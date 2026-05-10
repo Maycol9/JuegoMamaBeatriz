@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Para mi mamá Beatriz Figueroa 💖</title>
+  <title>Para Beatriz Figueroa 💖</title>
 
   <style>
     * {
@@ -16,83 +16,81 @@
     body {
       min-height: 100vh;
       overflow-x: hidden;
-      background: linear-gradient(135deg, #2b061e, #7b123f, #ff6aa2);
       color: white;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255, 209, 102, .26), transparent 28%),
+        radial-gradient(circle at 85% 10%, rgba(255, 122, 182, .32), transparent 30%),
+        linear-gradient(135deg, #210014, #67113f, #b51563, #ff6aa2);
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,.04) 1px, transparent 1px);
+      background-size: 42px 42px;
+      z-index: 0;
     }
 
     .fondo-corazones {
       position: fixed;
       inset: 0;
       overflow: hidden;
-      z-index: 0;
       pointer-events: none;
+      z-index: 1;
     }
 
     .corazon-fondo {
       position: absolute;
-      bottom: -50px;
-      font-size: 25px;
-      animation: subir linear infinite;
-      opacity: 0.7;
+      bottom: -80px;
+      opacity: .75;
+      animation: subirCorazon linear infinite;
+      filter: drop-shadow(0 10px 18px rgba(255, 63, 136, .45));
     }
 
-    @keyframes subir {
-      0% {
-        transform: translateY(0) rotate(0deg);
-        opacity: 0;
-      }
-      20% {
-        opacity: 0.8;
-      }
-      100% {
-        transform: translateY(-120vh) rotate(360deg);
-        opacity: 0;
-      }
+    @keyframes subirCorazon {
+      0% { transform: translateY(0) rotate(0deg) scale(.8); opacity: 0; }
+      15% { opacity: .85; }
+      100% { transform: translateY(-125vh) rotate(360deg) scale(1.25); opacity: 0; }
     }
 
-    .contenedor {
+    .app {
       position: relative;
       z-index: 2;
       min-height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 25px;
+      display: grid;
+      place-items: center;
+      padding: 24px;
     }
 
     .pantalla {
       display: none;
-      width: 100%;
-      max-width: 1050px;
-      min-height: 650px;
-      animation: aparecer 0.7s ease;
+      width: min(1120px, 100%);
+      min-height: min(720px, calc(100vh - 48px));
+      animation: aparecer .65s ease both;
     }
 
     .pantalla.activa {
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: grid;
+      place-items: center;
     }
 
     @keyframes aparecer {
-      from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.98);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+      from { opacity: 0; transform: translateY(18px) scale(.985); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
     }
 
     .tarjeta {
       width: 100%;
-      padding: 45px;
-      border-radius: 35px;
-      background: rgba(255, 255, 255, 0.14);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(15px);
+      border-radius: 36px;
+      padding: clamp(24px, 4vw, 54px);
+      background: linear-gradient(135deg, rgba(255,255,255,.18), rgba(255,255,255,.08));
+      border: 1px solid rgba(255,255,255,.24);
+      backdrop-filter: blur(18px);
+      box-shadow: 0 28px 90px rgba(0,0,0,.38);
       position: relative;
       overflow: hidden;
     }
@@ -100,152 +98,240 @@
     .tarjeta::before {
       content: "";
       position: absolute;
-      width: 360px;
-      height: 360px;
+      width: 440px;
+      height: 440px;
       border-radius: 50%;
-      top: -120px;
-      right: -100px;
-      background: radial-gradient(circle, rgba(255, 209, 102, 0.32), transparent 70%);
+      right: -150px;
+      top: -160px;
+      background: radial-gradient(circle, rgba(255,209,102,.30), transparent 68%);
+      pointer-events: none;
     }
 
     .etiqueta {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.18);
-      border: 1px solid rgba(255, 255, 255, 0.25);
-      padding: 10px 18px;
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 10px 16px;
       border-radius: 999px;
-      font-weight: bold;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.25);
+      font-weight: 800;
       margin-bottom: 22px;
     }
 
     h1 {
-      font-size: clamp(2.5rem, 7vw, 6rem);
-      line-height: 0.95;
-      letter-spacing: -2px;
-      margin-bottom: 20px;
-      text-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+      font-size: clamp(2.5rem, 7vw, 6.5rem);
+      line-height: .92;
+      letter-spacing: -3px;
+      text-shadow: 0 16px 36px rgba(0,0,0,.28);
+      margin-bottom: 22px;
     }
 
     h2 {
-      font-size: clamp(2rem, 5vw, 4rem);
+      font-size: clamp(2rem, 5vw, 4.3rem);
       line-height: 1;
-      margin-bottom: 20px;
+      letter-spacing: -1.6px;
+      margin-bottom: 18px;
     }
 
-    h1 span,
-    h2 span {
+    h1 span, h2 span {
       color: #ffd166;
-      text-shadow: 0 0 25px rgba(255, 209, 102, 0.7);
+      text-shadow: 0 0 24px rgba(255,209,102,.7);
+    }
+
+    h3 {
+      font-size: 1.35rem;
+      margin-bottom: 8px;
     }
 
     p {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      color: rgba(255, 255, 255, 0.9);
+      color: rgba(255,255,255,.90);
+      font-size: 1.08rem;
+      line-height: 1.75;
+    }
+
+    .texto-grande {
+      max-width: 860px;
+      font-size: clamp(1.08rem, 2.3vw, 1.35rem);
     }
 
     .botones {
       display: flex;
       flex-wrap: wrap;
-      gap: 15px;
-      margin-top: 30px;
+      gap: 14px;
+      margin-top: 32px;
     }
 
     button {
       border: none;
+      cursor: pointer;
       padding: 15px 24px;
       border-radius: 18px;
-      cursor: pointer;
-      font-weight: 900;
       font-size: 1rem;
-      background: linear-gradient(135deg, #fff0f7, #ffd166);
+      font-weight: 900;
       color: #3b0926;
-      box-shadow: 0 12px 30px rgba(255, 209, 102, 0.35);
-      transition: 0.25s;
+      background: linear-gradient(135deg, #fff0f7, #ffd166);
+      box-shadow: 0 16px 38px rgba(255,209,102,.28);
+      transition: .24s;
     }
 
     button:hover {
-      transform: translateY(-3px) scale(1.03);
-      filter: brightness(1.08);
+      transform: translateY(-3px) scale(1.02);
+      filter: brightness(1.05);
     }
 
     .secundario {
-      background: rgba(255, 255, 255, 0.15);
       color: white;
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.25);
       box-shadow: none;
     }
 
-    .datos {
+    .inicio-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      gap: 28px;
+      align-items: center;
+    }
+
+    .foto-hero {
+      position: relative;
+      min-height: 520px;
+      border-radius: 34px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.28);
+      box-shadow: 0 24px 70px rgba(0,0,0,.35);
+      background: rgba(255,255,255,.12);
+    }
+
+    .foto-hero img {
+      width: 100%;
+      height: 100%;
+      min-height: 520px;
+      object-fit: cover;
+      display: block;
+      filter: sepia(.08) saturate(1.05) contrast(1.03);
+    }
+
+    .foto-hero.sin-foto {
+      display: grid;
+      place-items: center;
+      min-height: 520px;
+    }
+
+    .foto-hero.sin-foto::before {
+      content: "💖 Recuerdo familiar";
+      font-size: 2rem;
+      font-weight: 900;
+      color: #ffd166;
+    }
+
+    .foto-hero::after {
+      content: "Un recuerdo que vale más que mil palabras";
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 18px;
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(0,0,0,.36);
+      backdrop-filter: blur(10px);
+      font-weight: 800;
+      line-height: 1.4;
+    }
+
+    .stats {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 15px;
+      gap: 14px;
       margin-top: 28px;
     }
 
-    .dato {
-      padding: 20px;
-      border-radius: 22px;
-      background: rgba(255, 255, 255, 0.13);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+    .stat {
+      padding: 18px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.17);
     }
 
-    .dato strong {
+    .stat strong {
       display: block;
-      font-size: 1.7rem;
       color: #ffd166;
-      margin-bottom: 5px;
+      font-size: 1.7rem;
+      margin-bottom: 4px;
     }
 
     .historia-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
       gap: 18px;
-      margin-top: 30px;
+      margin-top: 28px;
     }
 
     .historia-card {
-      padding: 24px;
-      min-height: 170px;
-      border-radius: 26px;
-      background: rgba(255, 255, 255, 0.13);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      animation: subirCard 0.7s ease both;
-    }
-
-    .historia-card:nth-child(2) {
-      animation-delay: 0.15s;
-    }
-
-    .historia-card:nth-child(3) {
-      animation-delay: 0.3s;
-    }
-
-    .historia-card:nth-child(4) {
-      animation-delay: 0.45s;
-    }
-
-    @keyframes subirCard {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      padding: 23px;
+      min-height: 178px;
+      border-radius: 28px;
+      background: rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.18);
     }
 
     .icono {
-      font-size: 2.5rem;
-      margin-bottom: 12px;
+      font-size: 2.4rem;
+      margin-bottom: 10px;
+    }
+
+    .album {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+      margin-top: 28px;
+    }
+
+    .foto-card {
+      border-radius: 30px;
+      overflow: hidden;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.22);
+      box-shadow: 0 18px 44px rgba(0,0,0,.22);
+    }
+
+    .foto-card img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      display: block;
+      transition: .35s;
+    }
+
+    .foto-card.sin-foto {
+      min-height: 300px;
+      display: grid;
+      place-items: center;
+    }
+
+    .foto-card.sin-foto::before {
+      content: "📸";
+      font-size: 4rem;
+    }
+
+    .foto-card:hover img {
+      transform: scale(1.05);
+    }
+
+    .foto-card div {
+      padding: 18px;
+    }
+
+    .foto-card h3 {
+      color: #ffd166;
     }
 
     .juego-layout {
       display: grid;
       grid-template-columns: 1fr 320px;
       gap: 22px;
-      margin-top: 25px;
+      margin-top: 26px;
     }
 
     .area-juego {
@@ -253,21 +339,23 @@
       height: 500px;
       border-radius: 30px;
       overflow: hidden;
-      background: radial-gradient(circle at top, rgba(255,255,255,0.25), rgba(255,255,255,0.07));
-      border: 1px solid rgba(255,255,255,0.22);
-      box-shadow: inset 0 0 60px rgba(255, 122, 182, 0.22);
+      background:
+        radial-gradient(circle at 50% 12%, rgba(255,255,255,.24), transparent 22%),
+        linear-gradient(180deg, rgba(255,255,255,.16), rgba(255,255,255,.06));
+      border: 1px solid rgba(255,255,255,.22);
+      box-shadow: inset 0 0 70px rgba(255,122,182,.16);
       touch-action: none;
     }
 
     .luna {
       position: absolute;
-      top: 25px;
       right: 30px;
-      width: 70px;
-      height: 70px;
+      top: 28px;
+      width: 72px;
+      height: 72px;
       border-radius: 50%;
       background: radial-gradient(circle, #fff, #ffd166);
-      box-shadow: 0 0 35px #ffd166;
+      box-shadow: 0 0 34px rgba(255,209,102,.72);
     }
 
     .canasta {
@@ -275,82 +363,84 @@
       bottom: 18px;
       left: 50%;
       transform: translateX(-50%);
-      width: 95px;
-      height: 60px;
-      border-radius: 20px 20px 30px 30px;
-      background: rgba(255,255,255,0.2);
-      border: 1px solid rgba(255,255,255,0.3);
+      width: 98px;
+      height: 62px;
+      border-radius: 20px 20px 32px 32px;
       display: grid;
       place-items: center;
-      font-size: 2.5rem;
+      font-size: 2.6rem;
+      background: rgba(255,255,255,.20);
+      border: 1px solid rgba(255,255,255,.28);
       user-select: none;
     }
 
     .objeto {
       position: absolute;
       top: -60px;
-      font-size: 2.2rem;
+      font-size: 2.15rem;
       user-select: none;
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.3));
+      filter: drop-shadow(0 8px 18px rgba(0,0,0,.28));
     }
 
     .panel-juego {
       padding: 22px;
-      border-radius: 28px;
-      background: rgba(255,255,255,0.13);
-      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 30px;
+      background: rgba(255,255,255,.13);
+      border: 1px solid rgba(255,255,255,.18);
     }
 
     .linea {
       display: flex;
       justify-content: space-between;
+      align-items: center;
+      gap: 12px;
       padding: 14px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.14);
+      border-bottom: 1px solid rgba(255,255,255,.14);
     }
 
     .linea strong {
       color: #ffd166;
-      font-size: 1.4rem;
+      font-size: 1.35rem;
     }
 
     .barra {
+      margin-top: 18px;
       width: 100%;
       height: 14px;
       border-radius: 999px;
-      background: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,.18);
       overflow: hidden;
-      margin-top: 18px;
     }
 
     .barra div {
       width: 0%;
       height: 100%;
-      border-radius: 999px;
+      border-radius: inherit;
       background: linear-gradient(90deg, #ffd166, #ff7ab6, white);
-      transition: 0.3s;
+      transition: .25s;
     }
 
     .mensaje-juego {
       margin-top: 18px;
       padding: 18px;
-      min-height: 145px;
-      border-radius: 22px;
-      background: rgba(255, 209, 102, 0.15);
+      min-height: 148px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, rgba(255,209,102,.18), rgba(255,255,255,.09));
       line-height: 1.6;
     }
 
     .opciones {
       display: grid;
-      gap: 15px;
+      gap: 14px;
       margin-top: 28px;
     }
 
     .opcion {
       width: 100%;
-      text-align: left;
-      background: rgba(255,255,255,0.14);
       color: white;
-      border: 1px solid rgba(255,255,255,0.22);
+      text-align: left;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.22);
       box-shadow: none;
     }
 
@@ -360,13 +450,12 @@
     }
 
     .carta {
-      width: 100%;
-      max-width: 830px;
-      padding: 45px;
-      border-radius: 35px;
-      background: rgba(255,255,255,0.94);
+      width: min(880px, 100%);
+      padding: clamp(26px, 5vw, 55px);
+      border-radius: 36px;
+      background: rgba(255,255,255,.95);
       color: #4b1234;
-      box-shadow: 0 25px 80px rgba(0,0,0,0.35);
+      box-shadow: 0 28px 90px rgba(0,0,0,.38);
       position: relative;
       overflow: hidden;
     }
@@ -374,14 +463,15 @@
     .carta::before {
       content: "💐";
       position: absolute;
-      top: 15px;
-      right: 25px;
-      font-size: 4rem;
-      opacity: 0.2;
+      right: 28px;
+      top: 20px;
+      font-size: 4.3rem;
+      opacity: .20;
     }
 
     .carta h2 {
       color: #9c1456;
+      margin-bottom: 18px;
     }
 
     .carta p {
@@ -390,7 +480,7 @@
     }
 
     .firma {
-      margin-top: 25px;
+      margin-top: 24px;
       color: #9c1456;
       font-size: 1.25rem;
       font-weight: 900;
@@ -399,40 +489,40 @@
     .confeti {
       position: fixed;
       inset: 0;
-      z-index: 50;
-      pointer-events: none;
       overflow: hidden;
+      pointer-events: none;
+      z-index: 80;
     }
 
     .pieza {
       position: absolute;
       top: -40px;
       font-size: 1.5rem;
-      animation: caer 3.5s linear forwards;
+      animation: caer 3.4s linear forwards;
     }
 
     @keyframes caer {
-      to {
-        transform: translateY(110vh) rotate(720deg);
-        opacity: 0;
-      }
+      to { transform: translateY(112vh) rotate(720deg); opacity: 0; }
     }
 
     .nota {
-      margin-top: 15px;
-      font-size: 0.95rem;
-      opacity: 0.8;
+      margin-top: 14px;
+      opacity: .80;
+      font-size: .95rem;
     }
 
-    @media (max-width: 850px) {
-      .tarjeta {
-        padding: 25px;
+    @media (max-width: 900px) {
+      .inicio-grid,
+      .historia-grid,
+      .album,
+      .juego-layout,
+      .stats {
+        grid-template-columns: 1fr;
       }
 
-      .datos,
-      .historia-grid,
-      .juego-layout {
-        grid-template-columns: 1fr;
+      .foto-hero,
+      .foto-hero img {
+        min-height: 390px;
       }
 
       .area-juego {
@@ -450,99 +540,152 @@
   <div class="fondo-corazones" id="fondoCorazones"></div>
   <div class="confeti" id="confeti"></div>
 
-  <main class="contenedor">
+  <main class="app">
 
     <section class="pantalla activa" id="inicio">
       <div class="tarjeta">
-        <div class="etiqueta">💖 Juego especial por el Día de la Madre</div>
+        <div class="inicio-grid">
+          <div>
+            <div class="etiqueta">💖 Regalo especial por el Día de la Madre</div>
 
-        <h1>Para mi mamá <span>Beatriz Figueroa</span></h1>
+            <h1>Mamá, esto es para <span>Beatriz Figueroa</span></h1>
 
-        <p>
-          Hoy empieza una pequeña aventura creada con mucho cariño para ti mama. 
-          En este juego vas a recoger corazones, desbloquear recuerdos bonitos 
-          y llegar a una carta final hecha especialmente para ti.
-        </p>
+            <p class="texto-grande">
+              Antes de iniciar, quiero que sepas algo: este no es solo un juego.
+              Es un pequeño regalo hecho con amor, recuerdos y gratitud para decirte
+              que tu presencia ha sido una de las bendiciones más grandes de mi vida.
+            </p>
 
-        <div class="datos">
-          <div class="dato">
-            <strong>3</strong>
-            Capítulos de historia
+            <div class="stats">
+              <div class="stat">
+                <strong>1</strong>
+                historia hecha con amor
+              </div>
+              <div class="stat">
+                <strong>3</strong>
+                recuerdos especiales
+              </div>
+              <div class="stat">
+                <strong>25</strong>
+                corazones para mamá
+              </div>
+            </div>
+
+            <div class="botones">
+              <button onclick="irA('historia')">Abrir mi regalo 💐</button>
+              <button class="secundario" onclick="musica()" id="btnMusica">Activar música suave 🎵</button>
+            </div>
+
+            <p class="nota">
+              En celular puedes mover la canasta con el dedo. En computadora, con el mouse o las flechas.
+            </p>
           </div>
-          <div class="dato">
-            <strong>25</strong>
-            Corazones por reunir
-          </div>
-          <div class="dato">
-            <strong>1</strong>
-            Carta especial
+
+          <div class="foto-hero">
+            <img src="assets/mama1.jpeg" alt="Recuerdo familiar especial" onerror="this.style.display='none'; this.parentElement.classList.add('sin-foto')">
           </div>
         </div>
-
-        <div class="botones">
-          <button onclick="irA('historia')">Comenzar aventura 💐</button>
-          <button class="secundario" onclick="musica()" id="btnMusica">Activar música suave 🎵</button>
-        </div>
-
-        <p class="nota">
-          Consejo: si lo abres en celular, mueve la canasta con el dedo.
-        </p>
       </div>
     </section>
 
     <section class="pantalla" id="historia">
       <div class="tarjeta">
-        <div class="etiqueta">🌷 Capítulo 1: Una mamá única</div>
+        <div class="etiqueta">🌷 Capítulo 1: Donde empezó el amor</div>
 
-        <h2>La historia de <span>Beatriz</span></h2>
+        <h2>Una historia llamada <span>mamá</span></h2>
 
-        <p>
-          En una familia llena de cariño existe una mamá especial, una mujer que con su amor,
-          su paciencia y su fortaleza convierte los días difíciles en esperanza.
+        <p class="texto-grande">
+          Hay recuerdos que no necesitan muchas palabras, porque una imagen basta para volver
+          a sentir el cariño, la protección y la ternura de una madre. Desde los primeros pasos,
+          siempre hubo una mano cuidando, una mirada pendiente y un amor que nunca faltó.
         </p>
 
         <div class="historia-grid">
           <div class="historia-card">
             <div class="icono">🕯️</div>
-            <h3>Luz en el camino</h3>
-            <p>Cuando hay dudas, su voz trae calma. Cuando hay cansancio, su amor da fuerza.</p>
+            <h3>Tu luz</h3>
+            <p>En los días difíciles, tu amor siempre ha sido una luz que calma, guía y acompaña.</p>
           </div>
 
           <div class="historia-card">
             <div class="icono">🤍</div>
-            <h3>Corazón protector</h3>
-            <p>Su manera de cuidar no siempre necesita palabras; basta su presencia para sentirse en casa.</p>
+            <h3>Tu paciencia</h3>
+            <p>Gracias por cada consejo, cada cuidado y cada momento en que estuviste presente sin esperar nada a cambio.</p>
           </div>
 
           <div class="historia-card">
             <div class="icono">🌹</div>
-            <h3>Amor verdadero</h3>
-            <p>El amor de mamá se demuestra en cada sacrificio, cada consejo y cada abrazo sincero.</p>
+            <h3>Tu sacrificio</h3>
+            <p>Muchas veces diste más de ti para que tu familia esté bien. Eso vale más que cualquier regalo.</p>
           </div>
 
           <div class="historia-card">
             <div class="icono">👑</div>
-            <h3>Beatriz Figueroa</h3>
-            <p>Una mamá valiente, noble y digna de recibir todo lo bonito del mundo.</p>
+            <h3>Tu valor</h3>
+            <p>Una madre como tú merece amor, respeto, gratitud y todos los abrazos bonitos del mundo.</p>
           </div>
         </div>
 
         <div class="botones">
-          <button onclick="iniciarJuego()">Ir al juego de corazones 💞</button>
+          <button onclick="irA('album')">Ver recuerdos familiares 📸</button>
           <button class="secundario" onclick="irA('inicio')">Volver</button>
+        </div>
+      </div>
+    </section>
+
+    <section class="pantalla" id="album">
+      <div class="tarjeta">
+        <div class="etiqueta">📸 Capítulo 2: Recuerdos que viven en el corazón</div>
+
+        <h2>Momentos que nunca se borran</h2>
+
+        <p class="texto-grande">
+          Estas fotos guardan algo más que un momento: guardan amor, infancia, familia y una historia
+          que merece ser recordada con orgullo y ternura.
+        </p>
+
+        <div class="album">
+          <div class="foto-card">
+            <img src="assets/mama1.jpeg" alt="Recuerdo familiar uno" onerror="this.style.display='none'; this.parentElement.classList.add('sin-foto')">
+            <div>
+              <h3>Cuando todo empezaba</h3>
+              <p>Un recuerdo lleno de ternura, cuidado y amor verdadero.</p>
+            </div>
+          </div>
+
+          <div class="foto-card">
+            <img src="assets/mama2.jpeg" alt="Recuerdo familiar dos" onerror="this.style.display='none'; this.parentElement.classList.add('sin-foto')">
+            <div>
+              <h3>Siempre pendiente</h3>
+              <p>Una imagen que recuerda la paciencia y la presencia de una madre.</p>
+            </div>
+          </div>
+
+          <div class="foto-card">
+            <img src="assets/mama3.jpeg" alt="Recuerdo familiar tres" onerror="this.style.display='none'; this.parentElement.classList.add('sin-foto')">
+            <div>
+              <h3>Amor de familia</h3>
+              <p>Hay momentos que pasan, pero el amor que dejaron permanece para siempre.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="botones">
+          <button onclick="iniciarJuego()">Jugar y reunir corazones 💞</button>
+          <button class="secundario" onclick="irA('historia')">Volver</button>
         </div>
       </div>
     </section>
 
     <section class="pantalla" id="juego">
       <div class="tarjeta">
-        <div class="etiqueta">🎮 Capítulo 2: Recoge amor para mamá</div>
+        <div class="etiqueta">🎮 Capítulo 3: Recoge amor para mamá</div>
 
         <h2>Reúne <span>25 corazones</span></h2>
 
         <p>
-          Mueve la canasta y recoge corazones, flores y estrellas. 
-          Evita las nubes tristes porque te quitan tiempo.
+          Mueve la canasta y recoge corazones, flores y estrellas. Evita las nubes tristes,
+          porque te quitan tiempo. Cada corazón desbloquea un mensaje para mamá.
         </p>
 
         <div class="juego-layout">
@@ -572,7 +715,7 @@
             </div>
 
             <div class="mensaje-juego" id="mensajeJuego">
-              Recoge corazones para desbloquear mensajes bonitos para ti mama.
+              Recoge corazones para desbloquear mensajes bonitos para Beatriz Figueroa.
             </div>
 
             <div class="botones">
@@ -585,17 +728,17 @@
 
     <section class="pantalla" id="pregunta">
       <div class="tarjeta">
-        <div class="etiqueta">✨ Capítulo 3: Pregunta del corazón</div>
+        <div class="etiqueta">✨ Capítulo 4: La pregunta del corazón</div>
 
         <h2>Para abrir la carta final...</h2>
 
-        <p>
-          ¿ Que es lo que te hace unica mama ?
+        <p class="texto-grande">
+          ¿Qué hace realmente valiosa a una madre?
         </p>
 
         <div class="opciones">
           <button class="opcion" onclick="respuesta(this, true)">
-            Su amor, su paciencia, su fuerza y todo lo que entrega por su familia 💖
+            Su amor, su paciencia, su sacrificio y todo lo que entrega por su familia 💖
           </button>
 
           <button class="opcion" onclick="respuesta(this, false)">
@@ -618,20 +761,25 @@
         <p id="textoMaquina"></p>
 
         <p>
-          Mamá, este pequeño juego fue creado para recordarte que eres una mujer maravillosa,
-          una guía, una fuerza y una bendición en mi vida.
+          Mamá, hoy quiero decirte gracias desde lo más profundo de mi corazón.
+          Gracias por cuidarme, por acompañarme, por enseñarme a seguir adelante
+          y por estar presente en tantos momentos importantes de mi vida.
         </p>
 
         <p>
-          Gracias por tus consejos, por tu cariño, por tu paciencia y por todas esas veces
-          en las que diste más de ti para verme bien. Tu amor no tiene comparación y tu presencia
-          hace que todo sea mejor.
+          Las fotos de este regalo me recuerdan que desde mis primeros pasos hubo amor,
+          paciencia y protección. Tal vez en ese tiempo yo no entendía todo lo que hacías por mí,
+          pero hoy valoro cada esfuerzo, cada sacrificio y cada gesto de cariño.
         </p>
 
         <p>
-          Hoy quiero que sepas que te admiro, te respeto y te llevo en mi corazón. 
-          Que este Día de la Madre esté lleno de alegría, flores, abrazos y sonrisas,
-          porque te mereces todo lo bonito del mundo.
+          Eres una mujer fuerte, noble y especial. Tu amor no se compara con nada,
+          porque el amor de una madre se queda para siempre en el alma.
+        </p>
+
+        <p>
+          Que este Día de la Madre recibas todo el cariño que mereces. Te admiro,
+          te respeto y te llevo siempre en mi corazón.
         </p>
 
         <div class="firma">
@@ -640,7 +788,8 @@
 
         <div class="botones">
           <button onclick="celebrar()">Lluvia de corazones 💞</button>
-          <button onclick="irA('inicio')">Jugar otra vez</button>
+          <button onclick="compartir()">Compartir regalo 📲</button>
+          <button onclick="irA('inicio')">Ver otra vez</button>
         </div>
       </div>
     </section>
@@ -648,7 +797,7 @@
   </main>
 
   <script>
-    const pantallas = ["inicio", "historia", "juego", "pregunta", "final"];
+    const pantallas = ["inicio", "historia", "album", "juego", "pregunta", "final"];
 
     const fondoCorazones = document.getElementById("fondoCorazones");
     const areaJuego = document.getElementById("areaJuego");
@@ -672,11 +821,11 @@
     let intervaloMusica = null;
 
     const mensajes = [
-      "💖 Beatriz, cada corazón representa un gracias por todo lo que haces.",
-      "🌷 Tu amor es de esos que protegen, acompañan y sanan.",
-      "✨ Una mamá como tú convierte cualquier día difícil en una oportunidad para seguir.",
-      "👑 Eres ejemplo de fuerza, nobleza y amor verdadero.",
-      "💐 Este juego guarda una carta final creada especialmente para ti."
+      "💖 Cada corazón representa un gracias por todo lo que una madre entrega.",
+      "🌷 El amor de mamá protege, acompaña, sana y fortalece.",
+      "✨ Hay recuerdos que nunca se borran porque fueron hechos con amor.",
+      "👑 Una madre fuerte merece admiración, respeto y gratitud.",
+      "💐 Ya casi llegas a la carta final. Este regalo fue hecho con mucho cariño."
     ];
 
     function irA(id) {
@@ -686,18 +835,20 @@
       if (id !== "juego") {
         detenerJuego();
       }
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
     function crearFondo() {
-      const iconos = ["💖", "💗", "💞", "🌹", "💐", "✨"];
+      const iconos = ["💖", "💗", "💞", "🌹", "💐", "✨", "⭐"];
 
-      for (let i = 0; i < 35; i++) {
+      for (let i = 0; i < 38; i++) {
         const c = document.createElement("div");
         c.className = "corazon-fondo";
         c.textContent = iconos[Math.floor(Math.random() * iconos.length)];
         c.style.left = Math.random() * 100 + "%";
         c.style.fontSize = 18 + Math.random() * 30 + "px";
-        c.style.animationDuration = 8 + Math.random() * 12 + "s";
+        c.style.animationDuration = 8 + Math.random() * 13 + "s";
         c.style.animationDelay = Math.random() * 10 + "s";
         fondoCorazones.appendChild(c);
       }
@@ -773,7 +924,7 @@
       const esBueno = Math.random() > 0.18;
 
       objeto.dataset.bueno = esBueno ? "1" : "0";
-      objeto.textContent = esBueno 
+      objeto.textContent = esBueno
         ? buenos[Math.floor(Math.random() * buenos.length)]
         : malos[Math.floor(Math.random() * malos.length)];
 
@@ -781,7 +932,7 @@
       areaJuego.appendChild(objeto);
 
       let y = -50;
-      const velocidad = 2.2 + nivel * 0.7 + Math.random() * 1.3;
+      const velocidad = 2.2 + nivel * .7 + Math.random() * 1.3;
 
       const caida = setInterval(() => {
         y += velocidad;
@@ -842,9 +993,9 @@
       t.style.zIndex = "100";
       t.style.fontWeight = "900";
       t.style.color = "white";
-      t.style.textShadow = "0 4px 12px rgba(0,0,0,0.4)";
+      t.style.textShadow = "0 4px 12px rgba(0,0,0,.4)";
       t.style.pointerEvents = "none";
-      t.style.transition = "0.8s ease";
+      t.style.transition = ".8s ease";
 
       document.body.appendChild(t);
 
@@ -862,7 +1013,7 @@
       if (correcta) {
         document.querySelectorAll(".opcion").forEach(o => o.disabled = true);
         boton.classList.add("correcta");
-        mensaje.textContent = "Respuesta correcta. El amor de mamá es el tesoro más grande.";
+        mensaje.textContent = "Respuesta correcta. El amor de mamá es el regalo más grande.";
         celebrar();
 
         setTimeout(() => {
@@ -894,17 +1045,17 @@
     function celebrar() {
       const iconos = ["💖", "💗", "💞", "🌹", "💐", "✨", "⭐"];
 
-      for (let i = 0; i < 80; i++) {
+      for (let i = 0; i < 90; i++) {
         const p = document.createElement("div");
         p.className = "pieza";
         p.textContent = iconos[Math.floor(Math.random() * iconos.length)];
         p.style.left = Math.random() * 100 + "%";
-        p.style.fontSize = 17 + Math.random() * 26 + "px";
-        p.style.animationDelay = Math.random() * 0.5 + "s";
+        p.style.fontSize = 17 + Math.random() * 27 + "px";
+        p.style.animationDelay = Math.random() * .5 + "s";
 
         confeti.appendChild(p);
 
-        setTimeout(() => p.remove(), 4200);
+        setTimeout(() => p.remove(), 4300);
       }
     }
 
@@ -927,11 +1078,11 @@
         audioCtx = new (window.AudioContext || window.webkitAudioContext)();
       }
 
-      const notas = [392, 440, 523, 440, 392, 330, 392, 523];
+      const notas = [392, 440, 523, 587, 523, 440, 392, 330, 392, 523];
       let i = 0;
 
       intervaloMusica = setInterval(() => {
-        tocarNota(notas[i % notas.length], 0.18, 0.045);
+        tocarNota(notas[i % notas.length], .18, .045);
         i++;
       }, 420);
     }
@@ -948,13 +1099,29 @@
       osc.type = "sine";
       osc.frequency.value = freq;
       gain.gain.value = volumen;
-      gain.gain.exponentialRampToValueAtTime(0.001, audioCtx.currentTime + duracion);
+      gain.gain.exponentialRampToValueAtTime(.001, audioCtx.currentTime + duracion);
 
       osc.connect(gain);
       gain.connect(audioCtx.destination);
 
       osc.start();
       osc.stop(audioCtx.currentTime + duracion);
+    }
+
+    function compartir() {
+      const url = window.location.href;
+      const texto = "Mamá, hice este regalo especial para ti por el Día de la Madre 💖 " + url;
+
+      if (navigator.share) {
+        navigator.share({
+          title: "Regalo para mamá",
+          text: texto,
+          url: url
+        });
+      } else {
+        navigator.clipboard.writeText(texto);
+        alert("Link copiado. Ahora puedes pegarlo en WhatsApp 💖");
+      }
     }
 
     document.addEventListener("keydown", e => {
@@ -979,7 +1146,6 @@
     }
 
     areaJuego.addEventListener("mousemove", e => ubicarCanasta(e.clientX));
-
     areaJuego.addEventListener("click", e => ubicarCanasta(e.clientX));
 
     areaJuego.addEventListener("touchmove", e => {
